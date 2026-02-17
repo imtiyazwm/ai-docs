@@ -126,20 +126,20 @@ const config = {
             label: 'Guide',
           },
           { to: '/blog', label: 'Blogs', position: 'left' },
-          {
-            type: 'docsVersionDropdown',
-            position: 'right',
-            versions: {
-              current: { label: 'v12.0.0' },
-            },
-            href: '#',
-            dropdownItemsAfter: [
-              {
-                href: 'https://archive-docs.wavemaker.com/',
-                label: 'Older Versions v10, v11',
-              },
-            ],
-          },
+          // {
+          //   type: 'docsVersionDropdown',
+          //   position: 'right',
+          //   versions: {
+          //     current: { label: 'v12.0.0' },
+          //   },
+          //   href: '#',
+          //   dropdownItemsAfter: [
+          //     {
+          //       href: 'https://archive-docs.wavemaker.com/',
+          //       label: 'Older Versions v10, v11',
+          //     },
+          //   ],
+          // },
         ],
       },
       footer: {
