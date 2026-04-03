@@ -4,7 +4,7 @@ import AIConversation from './AIConversation';
 import SourceCards from './SourceCards';
 import styles from './AskAIDialog.module.css';
 
-const SUGGESTIONS = [
+const FALLBACK_SUGGESTIONS = [
   'Binding Rest API',
   'File Upload Components',
   'Apply DS From Marketplace',
@@ -55,9 +55,53 @@ function getPageContext() {
   };
 }
 
+function useDynamicSuggestions(apiUrl, pageContext) {
+  const [suggestions, setSuggestions] = useState(null);
+
+  useEffect(() => {
+    if (!apiUrl) return;
+    let cancelled = false;
+
+    fetch(`${apiUrl}/api/v1/chat/suggestions`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        context: pageContext
+          ? {
+              pageTitle: pageContext.pageTitle || '',
+              pageSlug: pageContext.pageSlug || '',
+              pageCategory: pageContext.pageCategory || '',
+              pageSummary: pageContext.pageSummary || '',
+              pageHeadings: pageContext.pageHeadings || [],
+            }
+          : null,
+      }),
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error('Failed to fetch suggestions');
+        return res.json();
+      })
+      .then((data) => {
+        if (!cancelled && data.suggestions?.length) {
+          setSuggestions(data.suggestions);
+        }
+      })
+      .catch(() => {
+        // Silently fall back to static suggestions
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [apiUrl, pageContext?.pageSlug]);
+
+  return (suggestions || FALLBACK_SUGGESTIONS).slice(0, 3);
+}
+
 export default function AskAIDialog({ apiUrl, onClose, initialQuery = '' }) {
   const pageContext = getPageContext();
   const chat = useAIChat(pageContext, apiUrl);
+  const suggestions = useDynamicSuggestions(apiUrl, pageContext);
   const [input, setInput] = useState('');
   const [isClosing, setIsClosing] = useState(false);
   const inputRef = useRef(null);
@@ -74,8 +118,11 @@ export default function AskAIDialog({ apiUrl, onClose, initialQuery = '' }) {
 
   // Trigger fade-out then call onClose
   const handleClose = useCallback(() => {
+    if (chat.messages.length === 0) {
+      localStorage.removeItem('wm-search-session-messages');
+    }
     setIsClosing(true);
-  }, []);
+  }, [chat.messages.length]);
 
   const handleAnimationEnd = useCallback(() => {
     if (isClosing) onClose();
@@ -139,15 +186,12 @@ export default function AskAIDialog({ apiUrl, onClose, initialQuery = '' }) {
 
   // Source cards navigation
   const assistantMessages = chat.messages.filter((m) => m.role === 'assistant');
-  const totalAssistantMessages = assistantMessages.length;
 
   let activeCards = [];
-  let activeIndex = 0;
   let activeQuestion = '';
 
   if (chat.activeMessageId === '__streaming__') {
     activeCards = chat.currentSourceCards;
-    activeIndex = totalAssistantMessages + 1;
     const lastUser = [...chat.messages]
       .reverse()
       .find((m) => m.role === 'user');
@@ -158,8 +202,6 @@ export default function AskAIDialog({ apiUrl, onClose, initialQuery = '' }) {
     );
     if (activeMsg) {
       activeCards = activeMsg.sourceCards || [];
-      activeIndex =
-        assistantMessages.findIndex((m) => m.id === chat.activeMessageId) + 1;
       const msgIdx = chat.messages.findIndex(
         (m) => m.id === chat.activeMessageId,
       );
@@ -172,21 +214,6 @@ export default function AskAIDialog({ apiUrl, onClose, initialQuery = '' }) {
     }
   }
 
-  const handlePrevMessage = useCallback(() => {
-    const idx = assistantMessages.findIndex(
-      (m) => m.id === chat.activeMessageId,
-    );
-    if (idx > 0) chat.setActiveMessageId(assistantMessages[idx - 1].id);
-  }, [assistantMessages, chat]);
-
-  const handleNextMessage = useCallback(() => {
-    const idx = assistantMessages.findIndex(
-      (m) => m.id === chat.activeMessageId,
-    );
-    if (idx < assistantMessages.length - 1)
-      chat.setActiveMessageId(assistantMessages[idx + 1].id);
-  }, [assistantMessages, chat]);
-
   return (
     <div
       ref={overlayRef}
@@ -198,6 +225,24 @@ export default function AskAIDialog({ apiUrl, onClose, initialQuery = '' }) {
       <div className={styles.body}>
         {!hasMessages ? (
           <div className={styles.landing}>
+            <button
+              className={styles.landingCloseBtn}
+              onClick={handleClose}
+              aria-label="Close"
+            >
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+              >
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            </button>
             <div className={styles.landingHero}>
               <div>
                 <img src="/img/icon/AskAI-Icon.svg" alt="Ask AI" />
@@ -215,7 +260,7 @@ export default function AskAIDialog({ apiUrl, onClose, initialQuery = '' }) {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={handleKeyDown}
-                placeholder="Ask about academy content"
+                placeholder="Ask about WaveMaker..."
                 rows={3}
                 disabled={chat.isStreaming}
               />
@@ -242,7 +287,7 @@ export default function AskAIDialog({ apiUrl, onClose, initialQuery = '' }) {
             </form>
 
             <div className={styles.chips}>
-              {SUGGESTIONS.map((s) => (
+              {suggestions.map((s) => (
                 <button
                   key={s}
                   className={styles.chip}
@@ -271,7 +316,10 @@ export default function AskAIDialog({ apiUrl, onClose, initialQuery = '' }) {
                 </div>
                 <button
                   className={styles.closeBtn}
-                  onClick={handleClose}
+                  onClick={() => {
+                    localStorage.removeItem('wm-search-session-messages');
+                    handleClose();
+                  }}
                   aria-label="Close"
                 >
                   <svg
@@ -320,7 +368,12 @@ export default function AskAIDialog({ apiUrl, onClose, initialQuery = '' }) {
                       aria-label="Stop generation"
                       title="Stop generation"
                     >
-                      <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
+                      <svg
+                        width="12"
+                        height="12"
+                        viewBox="0 0 12 12"
+                        fill="currentColor"
+                      >
                         <rect x="1" y="1" width="10" height="10" rx="2" />
                       </svg>
                     </button>
@@ -379,16 +432,8 @@ export default function AskAIDialog({ apiUrl, onClose, initialQuery = '' }) {
             </div>
             <SourceCards
               cards={activeCards}
-              activeIndex={activeIndex}
               activeQuestion={activeQuestion}
-              totalMessages={
-                chat.isStreaming
-                  ? totalAssistantMessages + 1
-                  : totalAssistantMessages
-              }
               isLoading={chat.isStreaming && activeCards.length === 0}
-              onPrev={handlePrevMessage}
-              onNext={handleNextMessage}
             />
           </div>
         )}
