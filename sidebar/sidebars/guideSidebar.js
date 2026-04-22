@@ -100,6 +100,39 @@ export default [
         id: 'guide/integration/overview',
         label: 'Integration',
       },
+      {
+        type: 'doc',
+        id: 'guide/integration/set-up-wavemaker-project-locally',
+        label: 'Local Setup with Workspace Sync',
+      },
+    ],
+  },
+
+  {
+    type: 'category',
+    label: 'java-services',
+    collapsible: true,
+    collapsed: true,
+    items: [
+      {
+        type: 'doc',
+        id: 'guide/java-services/schedule-java-service',
+        label: 'Schedule a Java Service',
+      },
+    ],
+  },
+
+  {
+    type: 'category',
+    label: 'react-native',
+    collapsible: true,
+    collapsed: true,
+    items: [
+      {
+        type: 'doc',
+        id: 'guide/react-native/store-credentials-with-secure-store',
+        label: 'Secure Store',
+      },
     ],
   },
 ];
