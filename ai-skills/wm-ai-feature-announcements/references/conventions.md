@@ -70,14 +70,13 @@ Tags live in `blogs/feature-announcements/tags.yml`. Structure:
 
 Reference as `tags: [<tag-key>]`. The current file contains placeholder tags — verify with the user before reusing them.
 
-## Image placement
+## Asset placement
 
-Two valid locations exist in this repo; for feature announcements, prefer **co-located**:
+Co-locate all assets next to the post. Never use `static/img/` for announcement-specific assets.
 
-- **Preferred (co-located):** `blogs/feature-announcements/assets/images/<slug>/<image>.png`, referenced with relative paths (`./assets/images/<slug>/hero.png`).
-- Avoid `static/img/` for announcement-specific images — that directory is for globally shared assets.
+- **Images and GIFs:** `blogs/feature-announcements/assets/img/<image>.png`, referenced as `./assets/img/hero.png`.
 
-Always include descriptive `alt` text.
+Always include descriptive `alt` text on images.
 
 ## Availability line (required)
 

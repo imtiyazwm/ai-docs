@@ -13,7 +13,7 @@ WaveMaker public documentation. Docusaurus 3.9.2, MDX-first, Node ≥ 20. Deploy
 - Never bypass hooks with `--no-verify`. Fix the lint/build error instead.
 - Never invent entries in `data/author/authors.yml` or any `tags.yml`. If a referenced key is missing, stop and ask the user.
 - Never add an `<h1>` to a doc, blog, or announcement body. Titles come from frontmatter.
-- Never place announcement- or post-specific images under `static/img/`. Co-locate them next to the post.
+- Never place doc-, announcement-, or post-specific assets under `static/img/`. Co-locate them next to their content (see **Asset co-location** in File conventions).
 
 ## Validation gate
 
@@ -39,20 +39,54 @@ Both must pass. The build is the source of truth for link and image correctness 
 - MDX components registered in `src/theme/MDXComponents/index.js` (e.g., `AcademyCard`, `VideoCard`, `Pill`, `PillGroup`, `Accordian`, `TabsWrapper`) are globally available in any `.mdx` file. Do not import them — it causes redeclaration errors.
 - Angle-bracket placeholders (`<Your text here>`) are unsafe in MDX bodies — MDX parses them as JSX elements and fails on the next punctuation. In templates and examples, use plain-text placeholders or wrap JSX examples inside `{/* ... */}` comments.
 
+## Asset co-location
+
+Never put content-specific assets under `static/img/` — that directory is for globally shared assets only (e.g., favicons, site-wide logos). Everything else is co-located next to its content.
+
+### Images and GIFs
+
+Place images and GIFs in an `assets/img/` subdirectory next to the `.md` / `.mdx` file. This applies across all content types — docs pages, blog posts, and feature announcements alike.
+
+Reference them with a relative path using standard Markdown image syntax:
+
+```md
+![Descriptive alt text](./assets/img/filename.png)
+![Auto Layout demo](./assets/img/auto-layout-demo.gif)
+```
+
+### Videos
+
+Place videos in `assets/vids/` next to the post:
+
+```mdx
+<video controls width="100%" muted playsInline poster={require('./assets/vids/poster.jpg').default}>
+  <source src={require('./assets/vids/demo.mp4').default} type="video/mp4" />
+</video>
+```
+
+### Shared assets — nearest common ancestor
+
+If the same asset is used in more than one file, place it in the `assets/img/` directory of their nearest common ancestor. For example, if `section/page-a.mdx` and `section/page-b.mdx` both use the same image, it goes in `section/assets/img/`, and both files reference it with `./assets/img/filename.png`.
+
+### Alt text
+
+Required on every image. Describe what the image shows — not the surrounding heading or section title.
+
 ## Where things live
 
 ```
-docs/<section>/                → documentation pages (sidebar-registered)
-docs/release-notes/            → versioned release notes
-blogs/blog/                    → engineering blog posts          (/blog)
-blogs/feature-announcements/   → product feature announcements   (/feature-announcements)
-<post-dir>/assets/images/      → co-located images (preferred for new posts)
-static/img/                    → globally shared images (/img/... in links)
-data/author/authors.yml        → shared author registry
-sidebar/sidebars.js            → aggregator; do not add logic here
-sidebar/sidebars/*.js          → per-section sidebar configs
-scripts/doc-manager.mjs        → interactive CLI (npm run manage-docs)
-ai-skills/                     → agent skills for common workflows
+docs/<section>/                          → documentation pages (sidebar-registered)
+docs/release-notes/                      → versioned release notes
+blogs/blog/                              → engineering blog posts          (/blog)
+blogs/feature-announcements/             → product feature announcements   (/feature-announcements)
+<content-dir>/assets/img/               → co-located images and GIFs (docs and blogs)
+<content-dir>/assets/vids/     → co-located videos (feature announcements)
+static/img/                              → globally shared assets (/img/... in links)
+data/author/authors.yml             → shared author registry
+sidebar/sidebars.js                 → aggregator; do not add logic here
+sidebar/sidebars/*.js               → per-section sidebar configs
+scripts/doc-manager.mjs             → interactive CLI (npm run manage-docs)
+ai-skills/                          → agent skills for common workflows
 ```
 
 ## Sidebar editing
@@ -88,9 +122,9 @@ npm run gen-metrics   # regenerate scripts/metrics.json
 
 For specific workflows, load the matching skill under `ai-skills/` rather than improvising:
 
+- `wm-ai-release-notes` — add or edit entries in a versioned release notes file under `docs/release-notes/`.
 - `wm-feature-announcements` — new post under `blogs/feature-announcements/`.
-
-Additional skills (blog posts, release notes, docs pages, image placement) are planned.
+- `wm-ai-create-guide` — create a how-to or tutorial page under `docs/guide/`.
 
 ## Commits & PRs
 
