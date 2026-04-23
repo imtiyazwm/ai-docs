@@ -24,6 +24,11 @@ export default [
         items: [
           {
             type: 'doc',
+            id: 'release-notes/release-version-1/version-1-0-x/1.0.1-beta',
+            label: '1.0.1 Beta',
+          },
+          {
+            type: 'doc',
             id: 'release-notes/release-version-1/version-1-0-x/1.0.0-beta',
             label: '1.0.0 Beta',
           },
