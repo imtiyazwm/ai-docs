@@ -1,0 +1,22 @@
+name: Reindexing
+
+on:
+  push:
+    branches:
+      - prod
+
+jobs:
+  reindex:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Trigger Docs Indexer
+        run: |
+          curl --location 'https://docs-indexer.wavemaker.ai/api/v1/ingest' \
+          --header "x-api-key: ${{ secrets.DOCS_INDEXING_API_KEY }}" \
+          --header 'Content-Type: application/json' \
+          --data '{
+            "repo_url": "https://github.com/wavemaker/ai-docs",
+            "git_branch": "prod",
+            "force": false
+          }'
