@@ -46,13 +46,13 @@ Create exactly one file:
 blogs/feature-announcements/YYYY-MM-DD-<slug>.mdx
 ```
 
-If the announcement has images, place them at:
+If the announcement has images or GIFs, place them at:
 
 ```
-blogs/feature-announcements/assets/images/<slug>/<image>.png
+blogs/feature-announcements/assets/img/<image>.png
 ```
 
-Reference images with relative paths from the `.mdx` file (`./assets/images/<slug>/hero.png`). Do not place these images under `static/img/` — that directory is reserved for globally-shared assets.
+Reference assets with relative paths from the `.mdx` file (`./assets/img/hero.png`). Do not place these under `static/img/` — that directory is reserved for globally-shared assets.
 
 ## Procedure
 

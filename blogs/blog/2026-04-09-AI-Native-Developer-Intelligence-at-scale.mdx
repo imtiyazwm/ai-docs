@@ -9,9 +9,13 @@ authors: [SagarV]
 
 <PillGroup>
   <Pill type="langgraph" />
+
   <Pill type="rag" />
+
   <Pill type="mcp" />
+
   <Pill type="langfuse" />
+
   <Pill type="ai" />
 </PillGroup>
 
@@ -37,7 +41,7 @@ Rather than ingesting all content into a single shared index, we built a dedicat
 
 This matters because Docs are structured differently from video transcripts, which are structured differently from component specs, which are structured differently from marketplace artifacts. A single index flattens those distinctions. Separate MCP servers preserve them.
 
-![Ecosystem Overview — data sources, per-system indexing pipeline, and external MCP APIs](./assets/images/EcoSystem-Overview.png)
+![Ecosystem Overview — data sources, per-system indexing pipeline, and external MCP APIs](./assets/img//EcoSystem-Overview.png)
 *Ecosystem overview: Data sources, per-system indexing pipeline, and external MCP APIs*
 
 On top of those four servers sits a **LangGraph powered Ecosystem Agent** — a stateful orchestration layer that reasons across all four knowledge sources and synthesizes answers for both human developers and external AI agents. The same MCP layer that powers the user-facing Ask-AI also serves the platform's automated development agents during code generation. One system, two consumers.
@@ -47,7 +51,7 @@ Two improve system continuously and enhance the experience, we baked in:
 - **LangFuse for full trace observability.** Every agent invocation is traced. Retrieval quality, routing decisions, failure modes — all visible and actionable. The pipeline learns from production behavior, not from assumptions made at design time.
 - **Redis for caching.** Repeated queries are served from cache, keeping response times fast as usage scales.
 
-![Ecosystem Agent Flow — LangGraph orchestrator, MCP retrieval fan-out, retrieval fusion, and LangFuse tracing](./assets/images/EcoSystem-Agent-Flow.png)
+![Ecosystem Agent Flow — LangGraph orchestrator, MCP retrieval fan-out, retrieval fusion, and LangFuse tracing](./assets/img//EcoSystem-Agent-Flow.png)
 *Ecosystem Agent flow: LangGraph orchestrator, MCP retrieval fan-out, retrieval fusion, and LangFuse tracing*
 
 ---
@@ -56,12 +60,12 @@ Two improve system continuously and enhance the experience, we baked in:
 
 Every surface in the ecosystem has its own **Ask-AI**, tuned to the knowledge it serves.
 
-| Surface | What the AI understands |
-|---|---|
-| **Docs** | Full cross-system synthesis — the only surface that queries all four knowledge stores simultaneously |
-| **Academy** | Video structure — answers point to the exact timestamp with a thumbnail preview, not just the video title |
-| **Storybook** | Component internals — props, events, methods, design tokens, and usage examples inform ready-to-use code snippet generation |
-| **Marketplace** | Artifact landscape — surfaces existing connectors, designs, and apps to reduce duplication across teams |
+| Surface         | What the AI understands                                                                                                     |
+| --------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| **Docs**        | Full cross-system synthesis — the only surface that queries all four knowledge stores simultaneously                        |
+| **Academy**     | Video structure — answers point to the exact timestamp with a thumbnail preview, not just the video title                   |
+| **Storybook**   | Component internals — props, events, methods, design tokens, and usage examples inform ready-to-use code snippet generation |
+| **Marketplace** | Artifact landscape — surfaces existing connectors, designs, and apps to reduce duplication across teams                     |
 
 The Docs Ask-AI is the flagship. Every response is structured: a summary, an Academy video with exact timestamp, a code example drawn from Storybook specs, and references to relevant Marketplace artifacts. A developer asking a single question gets an answer that previously required navigating four separate systems.
 
@@ -71,7 +75,7 @@ The Docs Ask-AI is the flagship. Every response is structured: a summary, an Aca
 
 AI is only as good as the data feeding it. We invested in the retrieval pipeline with the same rigor we'd apply to any core product surface.
 
-![RAG Pipeline — ingestion, vector indexing, query normalisation, hybrid search, re-ranking, and summarisation](./assets/images/RAG-Pipeline.png)
+![RAG Pipeline — ingestion, vector indexing, query normalisation, hybrid search, re-ranking, and summarisation](./assets/img//RAG-Pipeline.png)
 *RAG pipeline: ingestion, vector indexing, query normalisation, hybrid search, re-ranking, and summarisation*
 
 Three principles shaped how we built it:
@@ -112,16 +116,18 @@ Synthesizing across four knowledge sources without a consistent answer structure
 
 This system replaced a fragmented, passive documentation landscape with an active, unified intelligence layer. The before-and-after is not incremental.
 
-| | Before | After |
-|---|---|---|
-| **Developer workflow** | 4 surfaces, 4 context switches per question | Single Ask-AI interaction, structured multi-source answer |
-| **Knowledge latency** | Deployment cycles — documentation changes required a release before they influenced AI | Minutes — any contribution reflects in AI responses within minutes |
-| **Video discoverability** | Searchable by title only | Segment-level indexing makes every moment in every video findable |
-| **Agent integration** | Development agents had no ecosystem knowledge | Agents query ecosystem knowledge via MCP during code generation |
+|                           | Before                                                                                 | After                                                              |
+| ------------------------- | -------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| **Developer workflow**    | 4 surfaces, 4 context switches per question                                            | Single Ask-AI interaction, structured multi-source answer          |
+| **Knowledge latency**     | Deployment cycles — documentation changes required a release before they influenced AI | Minutes — any contribution reflects in AI responses within minutes |
+| **Video discoverability** | Searchable by title only                                                               | Segment-level indexing makes every moment in every video findable  |
+| **Agent integration**     | Development agents had no ecosystem knowledge                                          | Agents query ecosystem knowledge via MCP during code generation    |
 
 <StatPills>
   <StatPill color="blue" label="4 → 1" description="knowledge surfaces unified into a single AI-mediated experience" />
+
   <StatPill color="green" label="< 5 min" description="from documentation contribution to live AI response" />
+
   <StatPill color="indigo" label="Scales Beyond Human UX" description="the same MCP infrastructure that serves developers also serves the platform's AI agents directly" />
 </StatPills>
 
