@@ -25,7 +25,7 @@ export default [
           {
             type: 'doc',
             id: 'release-notes/release-version-1/version-1-0-x/1.0.1-beta',
-            label: '1.0.1 Beta',
+            label: '1.0.1 Beta (Next)',
           },
           {
             type: 'doc',
