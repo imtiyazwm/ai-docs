@@ -34,8 +34,8 @@ Use this skill to help a writer or developer fill in a versioned release notes f
 
 Before editing the file, confirm:
 
-1. **What was shipped** — feature, enhancement, or bug fix? Let the user describe it in their own words; you will help categorise it.
-2. **Which release notes file** — confirm the file path is open or provided. The file lives at `docs/release-notes/release-version-<N>/<version-dir>/<version>.mdx`.
+1. **Which version** — default to the latest version found in `docs/release-notes/`. Resolve the file path automatically (see Step 0). Confirm with the user before proceeding.
+2. **What was shipped** — feature, enhancement, or bug fix? Let the user describe it in their own words; you will help categorise it.
 3. **Which tab** — Features, Enhancements, or Bug Fixes. See conventions for definitions.
 4. **Which accordian** — User Interface, Backend, Platform, or Product Ecosystem. See conventions for definitions.
 5. **Platform pills** — does this apply to Web, Mobile, or both? Or neither (no pill)?
@@ -61,6 +61,17 @@ The top-level template used to generate a new file is `assets/release-notes-temp
 
 ## Procedure
 
+### Step 0 — Resolve the target file
+
+Before asking the user anything, find the latest release notes file:
+
+1. List `docs/release-notes/` to find the highest `release-version-<N>` directory.
+2. Within that directory, find the highest version subdirectory and then the `.mdx` file inside it.
+3. Tell the user which file you found (e.g., "I'll be editing `docs/release-notes/release-version-1/version-1-0-x/1.0.0.mdx` — is that the right version?").
+4. If the user wants a different version, ask them to name it and resolve accordingly.
+
+Do not proceed until the user has confirmed the target file.
+
 ### Step 1 — Identify the item
 
 Ask the user: "What did you ship? Tell me the feature, enhancement, or fix — I'll help place and write it."
@@ -85,11 +96,23 @@ Ask: "Is there an existing doc to link to, or does this need one?"
 - **External URL**: accept as-is (Academy, Storybook, Marketplace, external blog).
 - **No link needed**: fine — not every entry requires one. Short, self-explanatory bug fixes can stand alone.
 
-### Step 4 — Add to the file
+### Step 4 — Confirm before writing
+
+Before touching any file, present the complete planned entry to the user:
+
+- The target file path
+- Which tab and accordian it will go into
+- The full MDX entry (title, pills, body, link if any)
+
+Ask: "Does this look right? I'll add it once you confirm."
+
+Only edit the file after explicit confirmation. If the user wants changes, update the draft and confirm again.
+
+### Step 5 — Add to the file
 
 Edit the release notes file and insert the entry in the correct accordian, maintaining the list structure. See `references/conventions.md` for the exact format.
 
-### Step 5 — Repeat or finish
+### Step 6 — Repeat or finish
 
 Ask if there are more items. When the user is done, run a final scan of the file and flag:
 
