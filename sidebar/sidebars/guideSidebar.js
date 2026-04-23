@@ -2,19 +2,37 @@
 export default [
   {
     type: 'category',
-    label: 'security',
+    label: 'App Solutions',
     collapsible: true,
     collapsed: true,
     items: [
       {
         type: 'doc',
-        id: 'guide/security/overview',
-        label: 'Security',
+        id: 'guide/app-solutions/overview',
+        label: 'App Solutions',
+      },
+    ],
+  },
+  {
+    type: 'category',
+    label: 'integration',
+    collapsible: true,
+    collapsed: true,
+    items: [
+      {
+        type: 'doc',
+        id: 'guide/integration/overview',
+        label: 'Integration',
       },
       {
         type: 'doc',
-        id: 'guide/security/customizing-post-authentication-handlers',
-        label: 'Customize Post-Authentication Handlers',
+        id: 'guide/integration/set-up-wavemaker-project-locally',
+        label: 'Local Setup with Workspace Sync',
+      },
+      {
+        type: 'doc',
+        id: 'guide/integration/use-sse-in-wavemaker-ui',
+        label: 'Handle SSE Events',
       },
     ],
   },
@@ -30,40 +48,55 @@ export default [
         id: 'guide/components/overview',
         label: 'Components',
       },
-    ],
-  },
-
-  {
-    type: 'category',
-    label: 'deployement',
-    collapsible: true,
-    collapsed: true,
-    items: [
       {
         type: 'doc',
-        id: 'guide/deployement/overview',
-        label: 'Deployement',
+        id: 'guide/components/dynamic-form-metadata',
+        label: 'Dynamic Form with Metadata',
       },
     ],
   },
 
   {
     type: 'category',
-    label: 'app-solutions',
+    label: 'security',
     collapsible: true,
     collapsed: true,
     items: [
       {
         type: 'doc',
-        id: 'guide/app-solutions/overview',
-        label: 'App Solutions',
+        id: 'guide/security/customizing-post-authentication-handlers',
+        label: 'Customize Post-Authentication Handlers',
+      },
+      {
+        type: 'doc',
+        id: 'guide/security/add-custom-filters',
+        label: 'Add Custom Filters',
       },
     ],
   },
 
   {
     type: 'category',
-    label: 'layouting-and-styling',
+    label: 'deployment',
+    collapsible: true,
+    collapsed: true,
+    items: [
+      {
+        type: 'doc',
+        id: 'guide/deployment/overview',
+        label: 'Deployment',
+      },
+      {
+        type: 'doc',
+        id: 'guide/deployment/ssl-offloading',
+        label: 'SSL Termination',
+      },
+    ],
+  },
+
+  {
+    type: 'category',
+    label: 'Layouting And Styling',
     collapsible: true,
     collapsed: true,
     items: [
@@ -91,19 +124,19 @@ export default [
 
   {
     type: 'category',
-    label: 'integration',
+    label: 'databases',
     collapsible: true,
     collapsed: true,
     items: [
       {
         type: 'doc',
-        id: 'guide/integration/overview',
-        label: 'Integration',
+        id: 'guide/databases/integrate-flyway-wavemaker',
+        label: 'Flyway Integration',
       },
       {
         type: 'doc',
-        id: 'guide/integration/set-up-wavemaker-project-locally',
-        label: 'Local Setup with Workspace Sync',
+        id: 'guide/databases/db-crud-event-listeners',
+        label: 'DB CRUD Event Listeners',
       },
     ],
   },
@@ -119,18 +152,23 @@ export default [
         id: 'guide/java-services/schedule-java-service',
         label: 'Schedule a Java Service',
       },
+      {
+        type: 'doc',
+        id: 'guide/java-services/custom-status-code-and-error-message',
+        label: 'Custom Status Codes & Error Messages',
+      },
     ],
   },
 
   {
     type: 'category',
-    label: 'react-native',
+    label: 'Device Native',
     collapsible: true,
     collapsed: true,
     items: [
       {
         type: 'doc',
-        id: 'guide/react-native/store-credentials-with-secure-store',
+        id: 'guide/device-native/store-credentials-with-secure-store',
         label: 'Secure Store',
       },
     ],
