@@ -24,18 +24,18 @@ The body **must not** open with an `<h1>`. The page title comes from frontmatter
 
 A common structural skeleton — adapt to the topic, do not force every section:
 
-| Section             | Purpose                                                                                             |
-| ------------------- | --------------------------------------------------------------------------------------------------- |
-| Intro paragraph     | One or two sentences immediately after frontmatter. State what the page is about. No heading.       |
-| Overview            | Optional `## Overview`. The "what and why" in 2–4 sentences. Use this when the intro is not enough. |
-| When to use         | Bulleted scenarios where the feature applies.                                                       |
-| How it works        | Conceptual model. Often the right place for a diagram or mermaid flow.                              |
-| Configuration       | Parameters, modes, options, with tables where the options are enumerable.                           |
-| Examples            | Concrete fenced code blocks. Label the language.                                                    |
-| Generated artifacts | Specific to platform-generated code. List models, services, controllers with paths.                 |
-| Notes / Limitations | Edge cases, gotchas, database-specific caveats. Use `:::note`, `:::warning` admonitions sparingly.  |
-| Summary             | Optional `## Summary`. 3–5 bullets recapping the key capabilities.                                  |
-| Related             | Links to sibling reference docs and relevant how-to guides.                                         |
+| Section             | Purpose                                                                                                                                                     |
+| ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Intro paragraph     | One or two sentences immediately after frontmatter. State what the page is about. No heading.                                                               |
+| Overview            | Optional `## Overview`. The "what and why" in 2–4 sentences. Use this when the intro is not enough.                                                         |
+| When to use         | Bulleted scenarios where the feature applies.                                                                                                               |
+| How it works        | Conceptual model. Often the right place for a diagram or mermaid flow.                                                                                      |
+| Configuration       | Parameters, modes, options, with tables where the options are enumerable.                                                                                   |
+| Examples            | Concrete fenced code blocks. Label the language.                                                                                                            |
+| Generated artifacts | Specific to platform-generated code. List models, services, controllers with paths.                                                                         |
+| Notes / Limitations | Edge cases, gotchas, database-specific caveats. Use `:::note`, `:::warning` admonitions sparingly.                                                          |
+| Summary             | Optional `## Summary`. 3–5 bullets recapping the key capabilities.                                                                                          |
+| Related             | Links to sibling reference docs and relevant how-to guides. Add only when asked, or suggest it if genuinely useful links exist — do not include by default. |
 
 Section dividers (`---` horizontal rules) are used between major sections in many existing pages. They are optional — match the surrounding files.
 
@@ -115,7 +115,7 @@ Per `AGENTS.md`, content-specific assets are **co-located** next to the content,
 
 Co-locate under an `assets/img/` directory next to the `.mdx` / `.md` file:
 
-```
+```text
 docs/<section>/<subsection>/
 ├── my-doc.mdx
 └── assets/
@@ -315,6 +315,8 @@ These short excerpts are the calibration target. New writing should sit alongsid
 
 > WaveMaker provides a robust, developer-friendly approach to working with databases. When an application is connected to a database, WaveMaker introspects the complete schema and automatically generates a standardized API layer with CRUD operations.
 
+(Note: "robust" appears here because this is a direct quote from an existing page. Do not copy the word — it predates the style guide. Use it to calibrate sentence rhythm and structure only.)
+
 ### Capability list
 
 > Once a database is connected, WaveMaker automatically generates CRUD APIs for selected tables and views. These APIs:
@@ -336,7 +338,7 @@ These short excerpts are the calibration target. New writing should sit alongsid
 
 ### Generated artifacts (code-block tree)
 
-> ```
+> ```text
 > services/
 > └── hrdb/
 >     ├── designtime/

@@ -32,7 +32,7 @@ This skill is **interactive**. Work with the user one decision at a time. Outlin
 - User wants a step-by-step how-to or tutorial → use `wm-ai-create-guide`. Guides live under `docs/guide/` and are task-oriented.
 - User wants to log a shipped item in a versioned release notes file → use `wm-ai-release-notes`.
 - User wants a public-facing announcement on `/feature-announcements` → use `wm-feature-announcements`.
-- User wants a narrative engineering blog post → use the blog skill.
+- User wants a narrative engineering blog post → no skill exists for blog posts yet; handle manually or ask the user to follow the blog contribution guide.
 
 If the request is borderline, ask one clarifying question before activating: "Is this a reference page that explains the topic, or a step-by-step guide to do something specific?"
 
@@ -74,7 +74,7 @@ Do not start drafting until the user has confirmed at least path, slug, title, a
 
 ### Step 2 (Create) — Propose an outline
 
-Before writing prose, propose the heading structure as a bulleted list of `##` and `###` headings. Lean on the patterns in `references/conventions.md` (Overview → When to use → How it works → Configuration → Examples → Notes/Limitations → Summary → Related). Adapt to the topic — do not force every section.
+Before writing prose, propose the heading structure as a bulleted list of `##` and `###` headings. Lean on the patterns in `references/conventions.md` (Overview → When to use → How it works → Configuration → Examples → Notes/Limitations → Summary). Adapt to the topic — do not force every section. Do not add a `## Related` section unless the user asks for it or there are genuinely useful links to include — propose it as an option if relevant sibling docs exist.
 
 Present the outline and ask: "Does this structure look right? I can add, remove, or reorder sections before we start writing."
 
@@ -109,7 +109,7 @@ Verify every path before writing it. If a target does not exist, stop and ask th
 
 Use `assets/doc-template.mdx` as the starting skeleton. Fill in frontmatter, drop in the agreed sections, attach assets, and write to disk.
 
-After writing, do not move on until you have also done Step 7 (sidebar) and Step 8 (validation).
+After writing, do not move on until you have also done Step 9 (sidebar) and Step 10 (validation).
 
 ### Step 6 (Update) — Procedure for updates
 
@@ -121,7 +121,7 @@ For an existing doc:
 4. For each change, present the proposed edit (old → new) and confirm before writing.
 5. If the change adds new headings or sections, re-run the outline check from Step 2.
 6. If the change adds or removes assets, follow Step 4 *and* clean up orphaned files (see "Asset cleanup" below).
-7. Proceed to Steps 7 and 8 only if the change affects sidebar wiring or link targets.
+7. Proceed to Steps 9 and 10 only if the change affects sidebar wiring or link targets.
 
 ### Step 7 (Move / rename) — Procedure for relocation
 
@@ -132,7 +132,7 @@ A move is three concurrent changes — the file, its assets, and every inbound r
 3. **Check asset sharing.** For each asset, grep the repo for other docs that reference it. If shared, the asset moves to the **nearest common ancestor's** `assets/img/` directory (per AGENTS.md). If exclusive, it moves with the doc.
 4. **Present the move plan** to the user — new path, asset moves, sidebar update, list of files whose links will change. Ask for confirmation.
 5. **Execute** — move the file, move its exclusive assets, rewrite inbound links to the new path, update the sidebar `id`, leave shared assets in place (relocate only if their common-ancestor changes).
-6. **Run validation** (Step 8). The build is the source of truth for link and image correctness — it must pass.
+6. **Run validation** (Step 10). The build is the source of truth for link and image correctness — it must pass.
 
 ### Step 8 (Delete) — Procedure for deletion
 
@@ -141,7 +141,7 @@ A move is three concurrent changes — the file, its assets, and every inbound r
 3. **Check asset sharing.** Assets used only by this doc are deleted. Assets shared with other docs stay; if the deleted doc was the only sibling pinning an asset to its current location, consider moving the asset closer to its remaining users.
 4. **Present the delete plan** — file to remove, assets to delete, inbound links to fix, sidebar entry to remove.
 5. **Execute** only after confirmation.
-6. **Run validation** (Step 8).
+6. **Run validation** (Step 10).
 
 ### Step 9 — Update the sidebar
 
@@ -172,7 +172,7 @@ The folder structure under `docs/<section>/` and the sidebar nesting are two rep
 
 When you place a new doc, derive the correct sidebar position by reading the folder path:
 
-```
+```text
 docs/<section>/<sub1>/<sub2>/my-doc.mdx
                 ↓       ↓
   sidebar: category<sub1> > category<sub2> > doc id="<section>/<sub1>/<sub2>/my-doc"
@@ -202,7 +202,7 @@ The `id` must exactly match the file path relative to `docs/`, without the `.md`
 
 From the repo root:
 
-```
+```sh
 npm run lint     # eslint + mdxlint --frail
 npm run build    # enforces onBrokenLinks / onBrokenImages: throw
 ```
