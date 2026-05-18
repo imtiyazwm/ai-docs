@@ -159,6 +159,27 @@ Every create / move / rename / delete touches `sidebar/sidebars/<area>Sidebar.js
 | `docs/user-interfaces/web`    | `userInterfacesWebSidebar.js`    |
 | `docs/user-interfaces/mobile` | `userInterfacesMobileSidebar.js` |
 
+#### File hierarchy mirrors sidebar nesting — keep them in sync
+
+The folder structure under `docs/<section>/` and the sidebar nesting are two representations of the same tree. **They must stay in sync at all times.**
+
+- Each **subdirectory** corresponds to a sidebar `category` at the same depth.
+- Each **file** corresponds to a sidebar `doc` item at the same depth.
+- **Adding a file** to an existing folder → add a `doc` entry inside the matching sidebar category.
+- **Adding a file in a new subfolder** → add a new `category` node wrapping a `doc` entry at the correct nesting level, not a flat entry at the top of the sidebar.
+- **Moving a file** to a deeper or shallower folder → move its sidebar entry to match the new depth.
+- **Renaming a folder** → rename (or reorganise) the matching sidebar category and update all `id` values inside it.
+
+When you place a new doc, derive the correct sidebar position by reading the folder path:
+
+```
+docs/<section>/<sub1>/<sub2>/my-doc.mdx
+                ↓       ↓
+  sidebar: category<sub1> > category<sub2> > doc id="<section>/<sub1>/<sub2>/my-doc"
+```
+
+Before editing the sidebar, read the current file (or a representative slice) to understand the existing nesting so you insert at the right level rather than appending at the top.
+
 Prefer, in order (per AGENTS.md):
 
 1. **`npm run manage-docs`** — interactive CLI that handles insertion, naming variants, and rollback. Recommend this to the user for any non-trivial change.
@@ -216,6 +237,7 @@ If the assets directory becomes empty after the operation, remove the empty dire
 - **Importing globally-registered components** — `AcademyCard`, `VideoCard`, `Pill`, `PillGroup`, `Accordian`, `TabsWrapper` are wired in `src/theme/MDXComponents/index.js`. Importing them causes redeclaration errors.
 - **Angle-bracket placeholders in MDX bodies** — `<Your text here>` is parsed as a JSX element and breaks the build. Use plain-text placeholders or wrap examples inside `{/* ... */}`.
 - **Skipping the sidebar update** — a doc with no sidebar entry is published but unreachable. Always update the matching sidebar file.
+- **Adding a sidebar entry at the wrong nesting level** — the sidebar tree must mirror the folder tree. A file at `docs/a/b/c/doc.mdx` belongs inside category `a` > category `b` > category `c`, not at the top level of the sidebar. Read the folder path, then insert the entry at the matching depth.
 - **Moving a file without rewriting inbound links** — `onBrokenLinks: 'throw'` means a stale link fails the build. Fix every reference, not just the file path.
 - **Leaving orphaned assets** — after a delete, remove any image that no other doc references.
 - **Skipping validation** — `npm run lint` and `npm run build` must both pass before declaring the change done.
@@ -230,6 +252,7 @@ If the assets directory becomes empty after the operation, remove the empty dire
 - [ ] Every mermaid block compiles (no stray characters; node IDs are unique).
 - [ ] Every internal link is relative, has no `.md` / `.mdx` extension, and points to a file that exists.
 - [ ] The matching sidebar file is updated; the entry `id` matches the file path relative to `docs/`.
+- [ ] The sidebar entry is nested at the depth that mirrors the folder depth — each subfolder level = one category level in the sidebar.
 - [ ] On move / rename: every inbound link has been rewritten; exclusive assets moved; orphans cleaned up.
 - [ ] On delete: every inbound link resolved; exclusive assets removed; sidebar entry removed.
 - [ ] `npm run lint` passes.
