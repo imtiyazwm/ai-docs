@@ -1,10 +1,10 @@
 ---
-title: WaveMaker Enterprise Prerequisites
+title: WaveMaker AI Enterprise Prerequisites
 last_update: { author: "Imtiyaz Mohammad" }
 id: prerequisites
 sidebar_label: Prerequisites
 ---
-You can set up WaveMaker Enterprise on any machine.
+You can set up WaveMaker AI Enterprise on any machine.
 
 :::note
 This document uses words like **VM**, **Instance** to refer a machine.
