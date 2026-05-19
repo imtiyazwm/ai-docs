@@ -4,6 +4,7 @@ last_update: { author: "WaveMaker" }
 id: getting-started
 sidebar_label: WaveMaker Enterprise AI Setup Process
 ---
+
 WaveMaker Enterprise AI (WME AI) is an on-premise offering of WaveMaker. WME AI can be installed on an on-premise/private cloud or public cloud. It can be hosted and managed by an organization on its own infrastructure.
 
 You can set up WaveMaker Enterprise AI on any machine.
@@ -36,7 +37,7 @@ Or, choose an on-premise virtualization provider from:
 
 1. [VMware ESXi (OVA)](../installation/platforms/vmware-esxi/launching-instances-in-esxi-ova)
 2. [VMware ESXi (ISO)](../installation/platforms/vmware-esxi/launching-instances-in-esxi-iso)
-3. [Hyper-V](../installation/platforms/hyperv/launching-instances-in-hyperv-vhd)
+3. [Hyper-V](../installation/platforms/hyperv/launching-instances-in-hyper-v-vhd)
 
 You can also choose bare metal or any other infrastructure option.
 
