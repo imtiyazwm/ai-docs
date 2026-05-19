@@ -1,10 +1,10 @@
 ---
-title: WaveMaker AI Enterprise Prerequisites
+title: WaveMaker Enterprise AI Prerequisites
 last_update: { author: "Imtiyaz Mohammad" }
 id: prerequisites
 sidebar_label: Prerequisites
 ---
-You can set up WaveMaker AI Enterprise on any machine.
+You can set up WaveMaker Enterprise AI on any machine.
 
 :::note
 This document uses words like **VM**, **Instance** to refer a machine.
@@ -172,7 +172,7 @@ Open the following ports on the StudioWorkspace Instance and AppDeployment Insta
 
 ### **Capacity planning**
 
-Adding an instance to either User Workspace or Deployed Apps increases WME setup capacity for application development and deployment, respectively. Each added User Workspace or Deployed Apps instance supports a specific number of app developments and app deployments. These numbers vary based on the WME version.
+Adding an instance to either User Workspace or Deployed Apps increases WME AI setup capacity for application development and deployment, respectively. Each added User Workspace or Deployed Apps instance supports a specific number of app developments and app deployments. These numbers vary based on the WME AI version.
 
 | Application Type    | Developer logins per 32GB WaveMaker Studio Instance | 
 | ------------------- | --------------------------------------------------- |
@@ -217,8 +217,8 @@ Map a domain to the above IP for easy access.
 
 | **Domain**              | **Domain URL**                                                                      | **Description**                                                                          |
 | ----------------------- | ----------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| WaveMaker Studio        | `wavemaker.[mycompany].com`                                                         | This domain will be used to access WaveMaker Studio                                      |
-| WaveMaker Deployed Apps | `wm-apps.[mycompany].com`  `wm-stage.[mycompany].com`     `wm-live.[mycompany].com` | These domains will be used to access WaveMaker Studio apps deployed onto WaveMaker Cloud |
+| WaveMaker Studio        | `wavemaker.[mycompany].com`                                                         | This domain will be used to access WaveMaker AI Studio                                      |
+| WaveMaker Deployed Apps | `wm-apps.[mycompany].com`  `wm-stage.[mycompany].com`     `wm-live.[mycompany].com` | These domains will be used to access WaveMaker AI Studio apps deployed onto WaveMaker AI Cloud |
 
 :::note
 In the preceding table, `[mycompany]` is used as an example. You may have to replace `[mycompany]` with your appropriate domain name.
