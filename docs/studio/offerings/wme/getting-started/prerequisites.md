@@ -10,11 +10,11 @@ You can set up WaveMaker Enterprise on any machine.
 This document uses words like **VM**, **Instance** to refer a machine.
 :::
 
-## **WME setup system requirements**
+## **WME AI setup system requirements**
 
 WaveMaker Enterprise AI can be installed on any machine that meets the following requirements. Before you start setting up WaveMaker Enterprise AI, review the minimum and recommended system requirements for each instance type.
 
-### **WME Platform Instance**
+### **WME AI Platform Instance**
 
 <table style={{ fontSize: '0.875rem', fontFamily: 'inherit' }}>
   <colgroup>
@@ -55,7 +55,7 @@ WaveMaker Enterprise AI can be installed on any machine that meets the following
   </tbody>
 </table>
 
-### **WME StudioWorkspace Instance and AppDeployment Instance**
+### **WME AI StudioWorkspace Instance and AppDeployment Instance**
 
 <table style={{ fontSize: '0.875rem', fontFamily: 'inherit' }}>
   <colgroup>
@@ -192,7 +192,7 @@ The actual app development and deployment support is also determined by your lic
 Different instances need to be added to each stage in the release pipeline.
 :::
 
-## **WME Setup Artifacts**
+## **WME AI Setup Artifacts**
 
 WaveMaker will share the required artifacts (installer files/Images) to do the setup. There are two ways to do the setup.
 
