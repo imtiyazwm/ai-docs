@@ -212,6 +212,7 @@ Open the following ports on the Observability Instance.
     <col style={{ width: '120px' }} />
     <col />
   </colgroup>
+  
   <thead>
     <tr>
       <th style={{ fontSize: '0.875rem' }}>Port</th>
