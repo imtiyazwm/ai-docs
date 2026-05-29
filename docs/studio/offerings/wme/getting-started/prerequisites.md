@@ -132,14 +132,14 @@ WaveMaker Enterprise AI can be installed on any machine that meets the following
     </tr>
     <tr>
       <td style={{ fontSize: '0.875rem' }}>Network</td>
-      <td><ul><li>Static IP</li><li>Open the required ports for access from the Platform Instance.</li></ul></td>
+      <td><ul><li>Static IP with valid DNS</li><li>Open the required ports for access from the Studio workspace Instance.</li></ul></td>
     </tr>
   </tbody>
 </table>
 
 ## **Port requirements**
 
-Open the following ports on the Platform Instance for access from the StudioWorkspace Instance and AppDeployment Instance.
+**Open the following ports on the Platform Instance for access from the StudioWorkspace Instance and AppDeployment Instance.**
 
 <table style={{ fontSize: '0.875rem', fontFamily: 'inherit' }}>
   <colgroup>
@@ -171,7 +171,7 @@ Open the following ports on the Platform Instance for access from the StudioWork
   </tbody>
 </table>
 
-Open the following ports on the StudioWorkspace Instance,  AppDeployment Instance and Observability Instance for access from the Platform Instance.
+**Open the following ports on the StudioWorkspace Instance,  AppDeployment Instance and Observability Instance for access from the Platform Instance.**
 
 <table style={{ fontSize: '0.875rem', fontFamily: 'inherit' }}>
   <colgroup>
@@ -205,14 +205,14 @@ Open the following ports on the StudioWorkspace Instance,  AppDeployment Instanc
   </tbody>
 </table>
 
-Open the following ports on the Observability Instance.
+**Open the following ports on the Observability Instance.**
 
 <table style={{ fontSize: '0.875rem', fontFamily: 'inherit' }}>
   <colgroup>
     <col style={{ width: '120px' }} />
     <col />
   </colgroup>
-  
+
   <thead>
     <tr>
       <th style={{ fontSize: '0.875rem' }}>Port</th>
@@ -221,9 +221,7 @@ Open the following ports on the Observability Instance.
   </thead>
   <tbody>
     <tr><td style={{ fontSize: '0.875rem' }}>3000</td><td>Open for access from the Studio workspace Instance to Observability Instance and vice-versa</td></tr>
-    <tr><td style={{ fontSize: '0.875rem' }}>80</td><td>Open to All</td></tr>
-    <tr><td style={{ fontSize: '0.875rem' }}>443</td><td>Open to All</td></tr>
-    <tr><td style={{ fontSize: '0.875rem' }}>5050</td><td>Open to All</td></tr>
+    <tr><td style={{ fontSize: '0.875rem' }}>443</td><td>Open within the network to access the Observability UI</td></tr>
   </tbody>
 </table>
 
@@ -280,9 +278,9 @@ Map a domain to the above IP for easy access.
 
 | **Domain**              | **Domain URL**                                                                      | **Description**                                                                          |
 | ----------------------- | ----------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| WaveMaker Studio        | `wavemaker.[mycompany].com`                                                         | This domain will be used to access WaveMaker AI Studio                                      |
-| WaveMaker Deployed Apps | `wm-apps.[mycompany].com`  `wm-stage.[mycompany].com`     `wm-live.[mycompany].com` | These domains will be used to access WaveMaker AI Studio apps deployed onto WaveMaker AI Cloud |
-
+| WaveMaker Studio        | `wavemakerai.[mycompany].com`                                                         | This domain will be used to access WaveMaker AI Studio                                      |
+| WaveMaker Deployed Apps | `wmai-apps.[mycompany].com`  `wmai-stage.[mycompany].com`     `wmai-live.[mycompany].com` | These domains will be used to access WaveMaker AI Studio apps deployed onto WaveMaker AI Cloud |
+| WaveMaker AI Observability | `wmai-observability.[mycompany].com` | This domain will be used to access WaveMaker AI Observability service|
 :::note
 In the preceding table, `[mycompany]` is used as an example. You may have to replace `[mycompany]` with your appropriate domain name.
 :::
