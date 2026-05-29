@@ -280,7 +280,7 @@ Map a domain to the above IP for easy access.
 | ----------------------- | ----------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
 | WaveMaker Studio        | `wavemakerai.[mycompany].com`                                                         | This domain will be used to access WaveMaker AI Studio                                      |
 | WaveMaker Deployed Apps | `wmai-apps.[mycompany].com`  `wmai-stage.[mycompany].com`     `wmai-live.[mycompany].com` | These domains will be used to access WaveMaker AI Studio apps deployed onto WaveMaker AI Cloud |
-| WaveMaker AI Observability | `wmai-observability.[mycompany].com` | This domain will be used to access WaveMaker AI Observability service|
+| WaveMaker AI Observability | `wmai-analytics.[mycompany].com` | This domain will be used to access WaveMaker AI Analytics service|
 :::note
 In the preceding table, `[mycompany]` is used as an example. You may have to replace `[mycompany]` with your appropriate domain name.
 :::
